@@ -1,0 +1,159 @@
+#include "Controls.h"
+
+Controls::Controls(sf::RenderWindow& window) : window(window){
+	for(int i = 0; i < NUM_KEYS; i++){
+		keyStates[i] = NOT_PRESSED;
+		prevKeyStates[i] = NOT_PRESSED;
+	}
+
+	for(int i = 0; i < NUM_MOUSE_BUTTONS; i++){
+		mouseStates[i] = NOT_PRESSED;
+		prevMouseStates[i] = NOT_PRESSED;
+	}
+
+	mousePos = sf::Vector2i(0, 0);
+	prevMousePos = sf::Vector2i(0, 0);
+}
+
+int Controls::keyPressed(sf::Event::KeyEvent key){
+	prevKeyStates[key.code] = keyStates[key.code];
+	if(keyStates[key.code] == KEY_PRESSED){
+		keyStates[key.code] = KEY_HELD;
+	}else{
+		keyStates[key.code] = KEY_PRESSED;
+	}
+	return key.code;
+}
+
+int Controls::keyReleased(sf::Event::KeyEvent key){
+	prevKeyStates[key.code] = keyStates[key.code];
+	if(keyStates[key.code] == KEY_PRESSED || keyStates[key.code] == KEY_HELD){
+		keyStates[key.code] = KEY_RELEASED;
+	}else{
+		keyStates[key.code] = NOT_PRESSED;
+	}
+	return key.code;
+}
+
+void Controls::buttonPressed(sf::Event::MouseButtonEvent mouseButton){
+	if(mouseButton.button == sf::Mouse::Left){
+		prevMouseStates[LEFT] = mouseStates[LEFT];
+		mouseStates[LEFT] = KEY_PRESSED;
+	}else if(mouseButton.button == sf::Mouse::Right){
+		prevMouseStates[RIGHT] = mouseStates[RIGHT];
+		mouseStates[RIGHT] = KEY_PRESSED;
+	}
+}
+
+void Controls::buttonReleased(sf::Event::MouseButtonEvent mouseButton){
+	if(mouseButton.button == sf::Mouse::Left){
+		prevMouseStates[LEFT] = mouseStates[LEFT];
+		mouseStates[LEFT] = KEY_RELEASED;
+	}else if(mouseButton.button == sf::Mouse::Right){
+		prevMouseStates[RIGHT] = mouseStates[RIGHT];
+		mouseStates[RIGHT] = KEY_RELEASED;
+	}
+}
+
+void Controls::updateMousePos(sf::Vector2i mousePos){
+	prevMousePos = this->mousePos;
+	this->mousePos = mousePos;
+}
+
+int Controls::eventHandler(sf::Event event){
+	switch(event.type){
+	case sf::Event::KeyPressed:
+		if(keyPressed(event.key) == sf::Keyboard::Escape){
+			return -1;
+		}
+		return sf::Event::KeyPressed;
+	case sf::Event::KeyReleased:
+		keyReleased(event.key);
+		return sf::Event::KeyReleased;
+	case sf::Event::MouseButtonPressed:
+		this->buttonPressed(event.mouseButton);
+		return sf::Event::MouseButtonPressed;
+	case sf::Event::MouseButtonReleased:
+		this->buttonReleased(event.mouseButton);
+		return sf::Event::MouseButtonReleased;
+	}
+	
+	if(event.type == sf::Event::Closed){
+		return -1;
+	}
+
+	return event.type;
+}
+
+int Controls::updateControls(){
+	sf::Event event;
+	bool keyEventOccured = false;
+	bool mouseButtonEventOccured = false;
+	int eventCode;
+	while(window.pollEvent(event)){
+		eventCode = eventHandler(event);
+
+		if(eventCode == -1){
+			return CLOSE;
+		}
+
+		if(eventCode == sf::Event::KeyPressed || eventCode == sf::Event::KeyReleased){
+			keyEventOccured = true;
+		}
+
+		if(eventCode == sf::Event::MouseButtonPressed || eventCode == sf::Event::MouseButtonReleased){
+			mouseButtonEventOccured = true;
+		}
+	}
+
+	if(!keyEventOccured){
+		for(int i = 0; i < NUM_KEYS; i++){
+			if(keyStates[i] == KEY_PRESSED){
+				prevKeyStates[i] = keyStates[i];
+				keyStates[i] = KEY_HELD;
+			}else if(keyStates[i] == KEY_RELEASED){
+				prevKeyStates[i] = keyStates[i];
+				keyStates[i] = NOT_PRESSED;
+			}
+		}
+	}
+
+	if(!mouseButtonEventOccured){
+		for(int i = 0; i < NUM_MOUSE_BUTTONS; i++){
+			if(mouseStates[i] == KEY_PRESSED){
+				prevMouseStates[i] = mouseStates[i];
+				mouseStates[i] = KEY_HELD;
+			}else if(mouseStates[i] == KEY_RELEASED){
+				prevMouseStates[i] = mouseStates[i];
+				mouseStates[i] = NOT_PRESSED;
+			}
+		}
+	}
+
+	updateMousePos(sf::Mouse::getPosition(window));
+	return CONTINUE;
+}
+
+KeyState Controls::getKeyState(int key){
+	return keyStates[key];
+}
+
+KeyState Controls::getPrevKeyState(int key){
+	return prevKeyStates[key];
+}
+
+KeyState Controls::getMouseState(MouseButton button){
+	return mouseStates[button];
+}
+
+KeyState Controls::getPrevMouseState(MouseButton button){
+	return prevMouseStates[button];
+}
+
+sf::Vector2i Controls::getMousePos(){
+	return mousePos;
+}
+
+sf::Vector2i Controls::getPrevMousePos(){
+	return prevMousePos;
+}
