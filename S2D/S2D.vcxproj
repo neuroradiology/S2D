@@ -34,11 +34,14 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="src\BackgroundObject.h" />
     <ClInclude Include="src\CollisionListener.h" />
+    <ClInclude Include="src\Controls.h" />
     <ClInclude Include="src\DynamicObject.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GFXManager.h" />
+    <ClInclude Include="src\ManagerObject.h" />
     <ClInclude Include="src\Object.h" />
     <ClInclude Include="src\ObjectManager.h" />
+    <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\Screen.h" />
     <ClInclude Include="src\StaticObject.h" />
   </ItemGroup>
@@ -104,7 +107,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Doug\Documents\Visual Studio 2013\Projects\S2D\S2D\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>S2D\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
