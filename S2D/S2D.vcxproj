@@ -11,10 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Intro.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Platform.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="src\BackgroundObject.cpp" />
     <ClCompile Include="src\CollisionListener.cpp" />
     <ClCompile Include="src\Controls.cpp" />
@@ -29,9 +25,6 @@
     <ClCompile Include="src\StaticObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Intro.h" />
-    <ClInclude Include="Platform.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="src\BackgroundObject.h" />
     <ClInclude Include="src\CollisionListener.h" />
     <ClInclude Include="src\Controls.h" />
