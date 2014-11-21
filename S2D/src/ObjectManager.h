@@ -130,7 +130,7 @@ public:
 	bool removeObject(Object* object);
 
 	/*!
-	 * NOT IMPLEMENTED YET
+	 * TODO: NOT IMPLEMENTED YET
 	 * Removes all objects from the game except for persistent objects, unless force is true.
 	 * \param force Determines if persistent objects are removed from the game.
 	 */

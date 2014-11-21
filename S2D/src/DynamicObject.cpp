@@ -101,7 +101,7 @@ void DynamicObject::setSize(sf::Vector2f size){
 			((b2CircleShape*)mainShape)->m_radius = size.x > size.y ? (size.x / 2.0f) / scale : (size.y / 2.0f) / scale;
 			break;
 		case CONVEX:
-			//TODO: fingure out a good way to change the size of a convex object
+			//TODO: fingure out a good way to change the size of a convex object in box2d
 			break;
 		}
 	}

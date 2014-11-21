@@ -30,6 +30,7 @@ private:
 	b2FixtureDef mainFixtureDef;
 	
 	/*!
+	 * TODO: NOT IMPLEMENTED YET
 	 * Extra fixtures of this object. If you would like a more complex physics object, you can add extra fixtures to this vector.
 	 */
 	std::vector<b2FixtureDef> fixtureDefs;
@@ -84,12 +85,10 @@ public:
 	bool loadFromFile(sf::ConvexShape* container, std::string filename);
 
 	/*!
-	 * NOT IMPLEMENTED YET
-	 * Add a fixture to this object. This should only be used before the physics object is initialized.
-	 * After the physics object is initialized, you can use 'b2DEntity->CreateFixture(myFixtureDefPtr);'
-	 * to add fixtures to the object.
-	 * \param fixtureDef The fixture that will be added to the physics body.
-	 */
+	* TODO: NOT IMPLEMENTED YET
+	* Adds a fixture to the fixture vector.
+	* \param fixtureDef The fixture that will be added.
+	*/
 	void addFixture(b2FixtureDef fixtureDef);
 
 	/*!

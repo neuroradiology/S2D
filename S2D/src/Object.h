@@ -64,14 +64,14 @@ protected:
 	bool hasPhysics;
 
 	/*!
-	 * NOT IMPLEMENTED YET
+	 * TODO: NOT IMPLEMENTED YET
 	 * If an object has a sound, this must be set to true. This will be used by a sound manager to determine if an object has
 	 * sound. From this sound manager, you will be able to to set the volume of all sounds or stop all sounds from playing.
 	 */
 	bool hasSound;
 
 	/*!
-	 * NOT IMPLEMENTED YET
+	 * TODO: NOT IMPLEMENTED YET
 	 * not sure if i even need this to be honest. could be used for interaction with other objects maybe?
 	 * Like any object that collides with this object takes that effect.
 	 */
@@ -91,7 +91,7 @@ protected:
 	bool hasShader;
 
 	/*!
-	 * NOT IMPLEMENTED YET
+	 * TODO: NOT IMPLEMENTED YET
 	 * If this is set to true, it will not be removed from ObjectManager if removeAllObjects is called.
 	 * This allows the object to persist across scenes without having to add it every time the scene changes.
 	 */

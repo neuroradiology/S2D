@@ -16,16 +16,15 @@ class Object;
 * \class Game
 * \brief The main class of the engine. Contains the main loop.
 *
-* This is the main class of the engine where objects are added to the ObjectManager,
-* scenes are updated each frame. The main loop updates the control class,
-* objects, and draws/displays everything that is on the screen.
+* This is the main class of the engine where objects are added to the ObjectManager and the
+* current Scene is updated each frame. The main loop updates the Control class,
+* each Object in the Scene, and draws/displays everything that is on the Screen.
 */
 class Game : public Screen, private GFXManager, public Controls, public ObjectManager, private CollisionListener{
 private:
 
 	/*!
-	 * The clocked used for updating certain objects. It is restarted so it can be used to calculate
-	 * framerate.
+	 * The clock used for updating certain objects. It is restarted each frame.
 	 */
 	sf::Clock frameClock;
 
