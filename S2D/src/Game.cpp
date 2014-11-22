@@ -62,6 +62,9 @@ int Game::init(int settings){
 int Game::play(){
 
 	if(isOpen()){
+		if(currentScene != NULL){
+			currentScene->onStart();
+		}
 		//first pass displays objects before accepting input
 		updateObjects(frameClock.restart());
 		draw(this);

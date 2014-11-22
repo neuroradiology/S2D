@@ -55,10 +55,15 @@ public:
 	virtual void add(Object* object);
 
 	/*!
-	 * Updates this scene. This is for checking handling events in the scene. This should contain a condition that will end the scene.
-	 * \return -1 if the scene is over, otherwise return 0.
+	 * Called once when the game begins to play this scene. You should attach the camera and set any other scene specific settings here.
 	 */
-	virtual int update() = 0;
+	virtual void onStart();
+
+	/*!
+	 * Updates this scene. This is for checking handling events in the scene. This should contain a condition that will end the scene.
+	 * \return 1 if the scene is over, otherwise return 0.
+	 */
+	virtual int update();
 
 	/*!
 	 * \return The Object vector of this scene.

@@ -26,6 +26,14 @@ void Scene::add(Object* object){
 	objects.push_back(object);
 }
 
+void Scene::onStart(){
+
+}
+
+int Scene::update(){
+	return CLOSE;
+}
+
 std::vector<Object*>* Scene::getObjects(){
 	return &objects;
 }

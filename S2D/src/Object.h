@@ -129,6 +129,14 @@ protected:
 	int layer;
 
 	/*!
+	 * TODO: NOT IMPLEMENTED YET
+	 * The priority for when this object is updated.
+	 * The object with the largest positive priority will update first each frame.
+	 * The object with the largest negative priority will update last.
+	 */
+	int priority;
+
+	/*!
 	 * The transformable of this object.
 	 */
 	sf::Transformable* transformable;

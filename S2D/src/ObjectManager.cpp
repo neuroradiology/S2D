@@ -126,13 +126,11 @@ void ObjectManager::add(Object* object, MapType type, std::map<int, QueuePtr>* t
 void ObjectManager::addObject(Object* object, bool alwaysOnTop){
 	if(!alwaysOnTop){
 		add(object, BOTTOM);
-		newObjectAdded = true;
-		objectCount++;
 	}else{
 		add(object, TOP);
-		newObjectAdded = true;
-		objectCount++;
 	}
+	newObjectAdded = true;
+	objectCount++;
 	if(object->getBodyDef() != NULL){
 		object->initializeBody(world.CreateBody(object->getBodyDef()));
 	}
@@ -226,32 +224,29 @@ bool ObjectManager::updateObjects(sf::Time frameTime){
 	bool didSomethingUpdate = false;
 	bool update = false;
 
-	sf::Clock time;
-	time.restart();
 	//update box2d world
 	world.Step(timeStep, velocityIterations, positionIterations);
-	//printf("update world:\t%f\n", time.getElapsedTime().asSeconds() * 1000);
-	time.restart();
 	//update objects
 	for(std::map<int, QueuePtr>::iterator mi = objects.begin(); mi != objects.end(); mi++){
 		QueuePtr temp;
 		temp = mi->second;
 		while(temp != NULL){
-			didSomethingUpdate = temp->object->update(frameTime);
+			if(temp->object->update(frameTime)){
+				didSomethingUpdate = true;
+			}
 			temp = temp->next;
 		}
 	}
-	//printf("update bottom objects:\t%f\n", time.getElapsedTime().asSeconds() * 1000);
-	time.restart();
 	for(std::map<int, QueuePtr>::iterator mi = topObjects.begin(); mi != topObjects.end(); mi++){
 		QueuePtr temp;
 		temp = mi->second;
 		while(temp != NULL){
-			didSomethingUpdate = temp->object->update(frameTime);
+			if(temp->object->update(frameTime)){
+				didSomethingUpdate = true;
+			}
 			temp = temp->next;
 		}
 	}
-	//printf("update top objects:\t%f\n", time.getElapsedTime().asSeconds() * 1000);
 	if(newObjectAdded){
 		newObjectAdded = false;
 		return true;

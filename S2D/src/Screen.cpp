@@ -70,7 +70,7 @@ bool Screen::inView(Object* object){
 }
 
 bool Screen::inView(sf::Sprite* sprite){
-	//extend the screen to be 25% larger to account for the edges when there is rotation
+	//extend the screen to be 25% larger to account for the edges
 	sf::Vector2f screenSize(1.25f * screenSizeW, 1.25f * screenSizeH);
 	sf::Vector2f screenPosition(getCameraPosition().x - ((screenSize.x - screenSizeW) / 2.0f), getCameraPosition().y - ((screenSize.y - screenSizeH) / 2.0f));
 	sf::FloatRect screenRect(screenPosition, screenSize);
