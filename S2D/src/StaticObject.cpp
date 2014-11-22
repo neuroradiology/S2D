@@ -99,8 +99,11 @@ bool StaticObject::loadFromFile(sf::ConvexShape* container, std::string filename
 
 void StaticObject::setPosition(float x, float y, int layer){
 	transformable->setPosition(x, y);
-	bodyDef.position = b2Vec2(x / scale, y / scale);
-
+	if(b2DEntity != NULL){
+		b2DEntity->SetTransform(b2Vec2(x / scale, y / scale), b2DEntity->GetAngle());
+	}else{
+		bodyDef.position = b2Vec2(x / scale, y / scale);
+	}
 	this->layer = layer;
 }
 

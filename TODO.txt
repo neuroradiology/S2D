@@ -12,3 +12,4 @@ Think about ways to multi-thread the engine.
 *Fix shakey moving objects. I think this is specific to the movement method in the tutorial though. i.e. applying the force to achieve a specific velocity each frame.
 *There was another bug in one of my test games when the sf::view's position was very far from 0 (negative or positive), the camera would shake. Only if the object was moving. Or maybe the camera's position was slightly different than the objects position each frame?
 Add a namespace to S2D.
+**Get S2D working on Linux and create CMake file.
